@@ -7,7 +7,7 @@ var express_1 = __importDefault(require("express"));
 var images_1 = __importDefault(require("./api/images"));
 var router = express_1.default.Router();
 router.get('/', function (req, res) {
-    res.send('router');
+    res.send('Welcome to image processing API');
 });
 router.use('/images', images_1.default);
 exports.default = router;

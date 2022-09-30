@@ -1,12 +1,12 @@
-import express from 'express';
-import images from './api/images';
+import express from "express";
+import images from "./api/images";
 
 const router = express.Router();
 
-router.get('/', (req,res) => {
-    res.send('router');
+router.get("/", (req, res) => {
+  res.send("Welcome to image processing API");
 });
 
-router.use('/images', images);
+router.use("/images", images);
 
 export default router;
