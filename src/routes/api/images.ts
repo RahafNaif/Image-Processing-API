@@ -1,14 +1,10 @@
 import express from "express";
-import sharp from "sharp";
 import fs from "fs";
 import path from "path";
-import resizeImage from "../../controller/image-processing";
+import resizeImage from "../../services/image-processing";
 
 const images = express.Router();
-const originalDirectory = path.join(
-  __dirname,
-  "../../../assets/images/original"
-);
+const originalDirectory = path.join(__dirname, "../../../assets/images/original");
 const thumbDirectory = path.join(__dirname, "../../../assets/images/thumb");
 
 images.get("/", async (req, res) => {
@@ -17,10 +13,7 @@ images.get("/", async (req, res) => {
   const height: number = parseInt(req.query.height as string);
 
   const image = path.join(originalDirectory, `${imageName}.jpeg`);
-  const resizedImage = path.join(
-    thumbDirectory,
-    `${imageName}-${width}w-${height}h.jpeg`
-  );
+  const resizedImage = path.join(thumbDirectory, `${imageName}-${width}w-${height}h.jpeg`);
 
   if (fs.existsSync(image)) {
     if (width <= 0 || isNaN(width)) {
@@ -29,7 +22,7 @@ images.get("/", async (req, res) => {
       res.status(400).send("Sorry height not valid");
     } else {
       try {
-        const isImageResized = await resizeImage(imageName, width, height);
+        const isImageResized: boolean = await resizeImage(imageName, width, height);
         if (isImageResized) {
           const readImage = fs.readFileSync(resizedImage, { flag: "r" });
           res.writeHead(200, { "Content-Type": "image/jpeg" });

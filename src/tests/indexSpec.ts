@@ -1,6 +1,6 @@
 import supertest from "supertest";
 import app from "../index";
-import resizeImage from "../controller/image-processing";
+import resizeImage from "../services/image-processing";
 
 const request = supertest(app);
 describe("Test endpoint responses", () => {
