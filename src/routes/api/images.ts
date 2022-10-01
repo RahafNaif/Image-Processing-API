@@ -1,19 +1,19 @@
-import express from "express";
+import express, { Router } from "express";
 import fs from "fs";
 import path from "path";
 import resizeImage from "../../services/image-processing";
 
-const images = express.Router();
-const originalDirectory = path.join(__dirname, "../../../assets/images/original");
-const thumbDirectory = path.join(__dirname, "../../../assets/images/thumb");
+const images: Router = express.Router();
+const originalDirectory: string = path.join(__dirname, "../../../assets/images/original");
+const thumbDirectory: string = path.join(__dirname, "../../../assets/images/thumb");
 
-images.get("/", async (req, res) => {
+images.get("/", async (req: express.Request, res: express.Response): Promise<void> => {
   const imageName: string = req.query.filename as string;
   const width: number = parseInt(req.query.width as string);
   const height: number = parseInt(req.query.height as string);
 
-  const image = path.join(originalDirectory, `${imageName}.jpeg`);
-  const resizedImage = path.join(thumbDirectory, `${imageName}-${width}w-${height}h.jpeg`);
+  const image: string = path.join(originalDirectory, `${imageName}.jpeg`);
+  const resizedImage: string = path.join(thumbDirectory, `${imageName}-${width}w-${height}h.jpeg`);
 
   if (fs.existsSync(image)) {
     if (width <= 0 || isNaN(width)) {
@@ -24,7 +24,7 @@ images.get("/", async (req, res) => {
       try {
         const isImageResized: boolean = await resizeImage(imageName, width, height);
         if (isImageResized) {
-          const readImage = fs.readFileSync(resizedImage, { flag: "r" });
+          const readImage: Buffer = fs.readFileSync(resizedImage, { flag: "r" });
           res.writeHead(200, { "Content-Type": "image/jpeg" });
           res.write(readImage);
           res.end();
