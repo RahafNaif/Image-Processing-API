@@ -41,13 +41,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var supertest_1 = __importDefault(require("supertest"));
 var index_1 = __importDefault(require("../index"));
+var image_processing_1 = __importDefault(require("../controller/image-processing"));
 var request = (0, supertest_1.default)(index_1.default);
-describe('Test endpoint responses', function () {
-    it('test / endpoint', function () { return __awaiter(void 0, void 0, void 0, function () {
+describe("Test endpoint responses", function () {
+    it("test the api endpoint", function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/')];
+                case 0: return [4 /*yield*/, request.get("/api")];
                 case 1:
                     response = _a.sent();
                     expect(response.status).toBe(200);
@@ -55,11 +56,13 @@ describe('Test endpoint responses', function () {
             }
         });
     }); });
-    it('test /api/images with valid query', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("test /api/images with valid query", function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/api/images').query({ filename: 'fjord', width: 400, height: 300 })];
+                case 0: return [4 /*yield*/, request
+                        .get("/api/images")
+                        .query({ filename: "fjord", width: 400, height: 300 })];
                 case 1:
                     response = _a.sent();
                     expect(response.status).toBe(200);
@@ -67,11 +70,13 @@ describe('Test endpoint responses', function () {
             }
         });
     }); });
-    it('test /api/images with does not exist image', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("test /api/images with does not exist image", function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/api/images').query({ filename: 'test', width: 400, height: 300 })];
+                case 0: return [4 /*yield*/, request
+                        .get("/api/images")
+                        .query({ filename: "test", width: 400, height: 300 })];
                 case 1:
                     response = _a.sent();
                     expect(response.status).toBe(400);
@@ -79,11 +84,13 @@ describe('Test endpoint responses', function () {
             }
         });
     }); });
-    it('test /api/images with unvalid width', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("test /api/images with unvalid width", function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/api/images').query({ filename: 'fjord', width: 0, height: 300 })];
+                case 0: return [4 /*yield*/, request
+                        .get("/api/images")
+                        .query({ filename: "fjord", width: 0, height: 300 })];
                 case 1:
                     response = _a.sent();
                     expect(response.status).toBe(400);
@@ -91,11 +98,13 @@ describe('Test endpoint responses', function () {
             }
         });
     }); });
-    it('test /api/images with unvalid height', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("test /api/images with unvalid height", function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/api/images').query({ filename: 'fjord', width: 0, height: -3 })];
+                case 0: return [4 /*yield*/, request
+                        .get("/api/images")
+                        .query({ filename: "fjord", width: 0, height: -3 })];
                 case 1:
                     response = _a.sent();
                     expect(response.status).toBe(400);
@@ -104,3 +113,20 @@ describe('Test endpoint responses', function () {
         });
     }); });
 });
+describe("Test image processing functionalites", function () { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        it("Test image processing", function () { return __awaiter(void 0, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, (0, image_processing_1.default)("fjord", 200, 200)];
+                    case 1:
+                        response = _a.sent();
+                        expect(response).toBeTrue();
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        return [2 /*return*/];
+    });
+}); });

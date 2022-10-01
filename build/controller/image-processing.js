@@ -42,8 +42,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var sharp_1 = __importDefault(require("sharp"));
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
-var originalDirectory = path_1.default.join(__dirname, '../../assets/images/original');
-var thumbDirectory = path_1.default.join(__dirname, '../../assets/images/thumb');
+var originalDirectory = path_1.default.join(__dirname, "../../assets/images/original");
+var thumbDirectory = path_1.default.join(__dirname, "../../assets/images/thumb");
 var resizeImage = function (imageName, width, height) { return __awaiter(void 0, void 0, void 0, function () {
     var image, resizedImage, e_1;
     return __generator(this, function (_a) {

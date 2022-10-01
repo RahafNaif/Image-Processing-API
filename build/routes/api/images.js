@@ -43,9 +43,9 @@ var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
 var image_processing_1 = __importDefault(require("../../controller/image-processing"));
 var images = express_1.default.Router();
-var originalDirectory = path_1.default.join(__dirname, '../../../assets/images/original');
-var thumbDirectory = path_1.default.join(__dirname, '../../../assets/images/thumb');
-images.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+var originalDirectory = path_1.default.join(__dirname, "../../../assets/images/original");
+var thumbDirectory = path_1.default.join(__dirname, "../../../assets/images/thumb");
+images.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var imageName, width, height, image, resizedImage, isImageResized, readImage, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -57,11 +57,11 @@ images.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 resizedImage = path_1.default.join(thumbDirectory, "".concat(imageName, "-").concat(width, "w-").concat(height, "h.jpeg"));
                 if (!fs_1.default.existsSync(image)) return [3 /*break*/, 6];
                 if (!(width <= 0 || isNaN(width))) return [3 /*break*/, 1];
-                res.status(400).send('Sorry width not valid');
+                res.status(400).send("Sorry width not valid");
                 return [3 /*break*/, 5];
             case 1:
                 if (!(height <= 0 || isNaN(height))) return [3 /*break*/, 2];
-                res.status(400).send('Sorry height not valid');
+                res.status(400).send("Sorry height not valid");
                 return [3 /*break*/, 5];
             case 2:
                 _a.trys.push([2, 4, , 5]);
@@ -69,20 +69,19 @@ images.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, f
             case 3:
                 isImageResized = _a.sent();
                 if (isImageResized) {
-                    readImage = fs_1.default.readFileSync(resizedImage, { flag: 'r' });
-                    res.writeHead(200, { 'Content-Type': 'image/jpeg' });
+                    readImage = fs_1.default.readFileSync(resizedImage, { flag: "r" });
+                    res.writeHead(200, { "Content-Type": "image/jpeg" });
                     res.write(readImage);
                     res.end();
                 }
                 return [3 /*break*/, 5];
             case 4:
                 e_1 = _a.sent();
-                res.status(400).send('Sorry something happen while processing image');
+                res.status(400).send("Sorry something happen while processing image");
                 return [3 /*break*/, 5];
             case 5: return [3 /*break*/, 7];
             case 6:
-                console.log(image);
-                res.status(400).send('Sorry this image does not exist');
+                res.status(400).send("Sorry this image does not exist");
                 _a.label = 7;
             case 7: return [2 /*return*/];
         }
