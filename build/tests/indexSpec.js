@@ -41,7 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var supertest_1 = __importDefault(require("supertest"));
 var index_1 = __importDefault(require("../index"));
-var image_processing_1 = __importDefault(require("../controller/image-processing"));
+var image_processing_1 = __importDefault(require("../services/image-processing"));
 var request = (0, supertest_1.default)(index_1.default);
 describe("Test endpoint responses", function () {
     it("test the api endpoint", function () { return __awaiter(void 0, void 0, void 0, function () {

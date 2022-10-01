@@ -2,8 +2,14 @@ import sharp from "sharp";
 import fs from "fs";
 import path from "path";
 
-const originalDirectory: string = path.join(__dirname, "../../assets/images/original");
-const thumbDirectory: string = path.join(__dirname, "../../assets/images/thumb");
+const originalDirectory: string = path.join(
+  __dirname,
+  "../../assets/images/original"
+);
+const thumbDirectory: string = path.join(
+  __dirname,
+  "../../assets/images/thumb"
+);
 
 const resizeImage = async (
   imageName: string,

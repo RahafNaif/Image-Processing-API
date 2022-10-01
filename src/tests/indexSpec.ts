@@ -38,9 +38,9 @@ describe("Test endpoint responses", () => {
   });
 });
 
-describe("Test image processing functionalites", async() => {
+describe("Test image processing functionalites", async () => {
   it("Test image processing", async () => {
-    const response = await resizeImage("fjord",200,200);
+    const response = await resizeImage("fjord", 200, 200);
     expect(response).toBeTrue();
   });
 });
